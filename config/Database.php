@@ -6,7 +6,7 @@ class Database{
 	private $host  = 'localhost';
     private $user  = 'root';
     private $password   = "";
-    private $database  = "cardapio"; 
+    private $database  = "calorysistemas_delivery"; 
     
     public function getConexao(){		
 		$con = new mysqli($this->host, $this->user, $this->password, $this->database);
