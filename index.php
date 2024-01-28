@@ -1,97 +1,139 @@
-<?php
-include_once 'config/Database.php';
-include_once 'class/Produto.php';
-include_once 'class/Categoria.php';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cs Delivery</title>
+  <link rel="shortcut icon" href="images/logo.jpg" type="image/x-icon">
+  <?php include('inc/container.php'); ?>
 
-$database = new Database();
-$db = $database->getConexao();
-$food = new Produto($db);
-$categoria = new Categoria($db);
+  <style>
+		/* Estilos básicos - customize conforme necessário */
+	body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f8f8f8;
+	color: #333;
+	}
 
-include('inc/header.php');
-?>
+	header {
+	background-color: #fff;
+	padding: 20px;
+	text-align: center;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
 
-<title>Cardapio Digital</title>
-<link rel="stylesheet" type="text/css" href="css/foods.css">
-<link rel="shortcut icon" href="images/msFavicon.png" type="image/x-icon">
-<?php include('inc/container.php'); ?>
+	header h1 {
+	margin: 0;
+	font-size: 2em;
+	}
+
+	nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 20px 0;
+	}
+
+	nav ul li {
+	display: inline;
+	margin-right: 20px;
+	}
+
+	nav ul li a {
+	text-decoration: none;
+	color: #333;
+	font-weight: bold;
+	background: #ff0;
+	padding: 10px;
+	border-radius: 5px;
+	}
+
+	nav ul li a:hover {
+	background-color: #ff6347; /* Mudança de cor ao passar o mouse */
+	}
+
+	main {
+	padding: 20px;
+	}
+
+	section {
+	margin-bottom: 20px;
+	}
+
+	/* Estilos para o rodapé */
+	footer {
+	text-align: center;
+	padding: 10px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #333;
+	color: #fff;
+	}
+
+	/* Estilos para a descrição */
+	.descricao {
+	font-family: Arial, sans-serif; /* Definindo a fonte como Arial */
+	font-size: 16px;
+	color: #333; /* Cor padrão do texto */
+	line-height: 1.5;
+	margin: 10px;
+	}
+
+	/* Estilos para 'Cs' em amarelo */
+	.cs {
+	color: #f00; /* Amarelo */
+	padding: 3px;
+	border-radius: 2px;
+	}
+
+	/* Estilos para 'Delivery' em vermelho */
+	.delivery {
+	color: #f00; /* Vermelho */
+	padding: #fff 3px;
+	border-radius: 2px;
+	}
 
 
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bem-vindo à CS DELIVERY</h1>
+    <nav>
+      <ul>
+        <li><a href="./painel/login.php">painel</a></li>
+      </ul>
+    </nav>
+  </header>
 
-
-<div class="p-3">
-
-	<h4 style="text-align: center">Categorias</h4>
-	<div class="nav justify-content-center">
-		<ul style="display: flex; " class="list-unstyled">
-			<?php
-			$result = $categoria->categoriasList(); ?>
-			<li><a class="btn btn-outline-danger"  style="text-decoration: none;" href='index.php'>Todas</a></li>
-			<?php
-			while ($item = $result->fetch_assoc()) : ?>
-				<li><a class="btn btn-outline-danger lg" style="margin-left: 5px; text-decoration: none;" href='index.php?categoria=<?php echo $item['id'] ?>'><?php echo $item['nome']; ?></a></li>
-			<?php endwhile; ?>
+  <main>
+    <section>
+		<h1>Nossas Pizzarias:</h1>
+	<nav>
+		<ul>
+			<li><a href="./cardapio/index.php?id_login=">Pizzaia teste</a></li>
+			<li><a href="./cardapio/index.php?id_login=">Pizzaia teste 2</a></li>
 		</ul>
-	</div>
-	<div>
+	</nav>
+      <h2>Informações da Empresa</h2>
+      <!-- Adicione informações sobre a sua empresa aqui -->
+      <p>Bem-vindo à rede de pizzarias inovadoras e deliciosas da <span class="cs">Cs</span> <span class="delivery">Delivery</span>! <br><br>
+	   Com um compromisso inabalável com a excelência gastronômica e a satisfação do cliente, nossa rede de pizzarias oferece uma experiência culinária única.
 
-		<form class="box-search" method="GET">
-			<input type="text" name="q" class="form-control" placeholder="Pesquisar">
-			<button type="submit" name="pesquisar" value="Pesquisar" class="btn btn-primary">
-				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-					<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-				</svg>
-			</button>
-		</form>
+Cada uma de nossas pizzarias, cuidadosamente desenvolvida pela equipe da <span class="cs">Cs</span> <span class="delivery">Delivery</span>, é um oásis gastronômico onde a arte de fazer pizza encontra tecnologia avançada. Desde os métodos tradicionais de preparo de massa até as combinações mais inovadoras de ingredientes frescos e sabores exclusivos, cada pizza é uma obra-prima artesanal. <br><br>
 
-		<!-- conteúdo -->
-		<div class="content">
-			<div class="container-fluid">
-				<div class='row'>
-					<?php include('top_menu.php'); ?>
-				</div>
-				<div class='row'>
-					<?php
-					$count = 0;
-					if (isset($_GET['q'])) {
-						$result = $food->itemsSearch($_GET['q']);
-					} else if (isset($_GET['categoria'])) {
-						$result = $food->itemsCategorie($_GET['categoria']);
-					} else {
-						$result = $food->itemsList();
-					}
+Nossas pizzarias não são apenas destinos para os amantes de pizza;<br><br>  são centros de inovação culinária. Nossa abordagem focada no cliente e na qualidade se estende não apenas aos produtos que oferecemos, mas também à experiência que proporcionamos. Dos sabores clássicos aos mais experimentais, cada mordida em uma pizza da nossa rede é uma viagem de sabor incomparável. <br><br>
 
-					while ($item = $result->fetch_assoc()) {
-						if ($count == 0) {
-							echo "<div class='row'>";
-						}
-					?>
-						<div class="col-md-3">
-							<form method="post" action="cart.php?action=add&id=<?php echo $item["id"]; ?>">
-								<div class="mypanel" align="center";>
-									<img src="images/<?php echo $item["images"]; ?>" alt="" class="img-fluid">
-									<h5 class="text-dark"><?php echo $item["name"]; ?></h5>
-									<p class="text"><?php echo $item["description"]; ?></p>
-									<h5 class="text"><strong>R$ <?php echo $item["price"]; ?></strong></h5>
-									<h6 class="text">Qtd.: <input type="number" min="1" max="25" name="quantity" class="form-control" value="1" style="width: 60px;"> </h6>
-									<input type="hidden" name="item_name" value="<?php echo $item["name"]; ?>">
-									<input type="hidden" name="item_price" value="<?php echo $item["price"]; ?>">
-									<input type="hidden" name="item_id" value="<?php echo $item["id"]; ?>">
-									<input type="submit" name="add" style="margin-top:5px;" class="btn btn-danger" value="Add ao carrinho">
-								</div>
-							</form>
-						</div>
+Além disso, estamos comprometidos com a comodidade. Com a plataforma <span class="cs">Cs</span> <span class="delivery">Delivery</span>, você pode explorar todas as nossas pizzarias, fazer pedidos online e ter suas pizzas favoritas entregues diretamente à sua porta, garantindo a frescura e o sabor em cada fatia. <br><br>
 
-					<?php
-						$count++;
-						if ($count == 4) {
-							echo "</div>";
-							$count = 0;
-						}
-					}
-					?>
-				</div>
+Junte-se a nós na <span class="cs">Cs</span> <span class="delivery">Delivery</span> e descubra um mundo de pizzas feitas com paixão, inovação e um toque especial que só a nossa rede pode oferecer.</p>
+    </section>
+  </main>
 
-			</div>
+  <script src="scripts.js"></script>
 
-			<?php include('inc/footer.php'); ?>
+  <?php include('inc/footer.php'); ?>
+</body>
+</html>
